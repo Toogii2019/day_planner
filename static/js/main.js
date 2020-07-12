@@ -22,12 +22,15 @@ $(document).ready(function() {
         dateMoveIndex --;
         $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));
         changeBackgroundOfTheDateHeader();
+        displayTimeBlocks();
     
     }
     function moveDateForward() {
         dateMoveIndex ++;
         $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));   
         changeBackgroundOfTheDateHeader();
+        displayTimeBlocks();
+
 
     }
     function displayTimeBlocks () {
@@ -37,16 +40,21 @@ $(document).ready(function() {
         for (i=0;i<10;i++) {
             var rowDiv = $("<div>");
             rowDiv.attr("class", "row hour");
+            rowDiv.attr("id", "row" + i);
             var textArea = $("<textarea>");
             // textArea.attr("onfocus", "function() test {console.log('focusing')}");
-            if (moment().isBefore(moment().hour(9+i))) {
+            if (moment().isBefore(moment($("#currentDay").text()).hour(9+i))) {
+                console.log("Before")
                 textArea.attr("class","time-block future");
             }
-            else if (moment().isSame(moment().hour(9+i))) {
+            else if (moment().isSame(moment($("#currentDay").text()).hour(9+i))) {
                 textArea.attr("class","time-block present");
+                console.log("Same")
             }
             else {
                 textArea.attr("class","time-block past");
+                console.log("After")
+
 
             }
             // if (dateReal > dateOnCalendar) {
@@ -57,7 +65,10 @@ $(document).ready(function() {
             // }
             var saveButton = $("<button>");
             saveButton.attr("class", "saveBtn");
+            saveButton.attr("value", moment().hour(9+i).format("h A"));
+
             saveButton.text("Save");
+
             // var timeDesc = $("div").attr("class", "timeDesc");
             // timeDesc.text(timeOfTheDay.hour(9+i).minutes(0).format("LT"));
             // rowDiv.append(timeDesc);
@@ -86,6 +97,9 @@ $(document).ready(function() {
 
 
 
+    $(".saveBtn").on("click", function(event) {
+        console.log(event.target.value);
 
+    })
 
 })
