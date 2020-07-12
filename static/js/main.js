@@ -1,15 +1,35 @@
 $(document).ready(function() {
     console.log(moment());
     const today = moment().format("LL");
-    $("#currentDay").text(today);
-    
-    function checkActivity() {
-        console.log("Focusing")
+    $("#currentDay").text(moment().format("LL"));
+    var dateMoveIndex = 0;
+
+    function changeBackgroundOfTheDateHeader() {
+        if (moment($("#currentDay").text()).isSame(moment().format("MMMM DD YYYY"))) {
+            console.log("Today");
+            $("#currentDay").attr("class", "present");
+        }
+        else if (moment($("#currentDay").text()).isBefore(moment().format("MMMM DD YYYY"))) {
+            $("#currentDay").attr("class", "past");
+        }
+        else {
+            $("#currentDay").attr("class", "future");
+        }
     }
 
-    var businessTimeArray = ["9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM","6:00 PM"];
-    var timeOfTheDay = moment()
+    function moveDateBackward() {
+        console.log("moving back");
+        dateMoveIndex --;
+        $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));
+        changeBackgroundOfTheDateHeader();
+    
+    }
+    function moveDateForward() {
+        dateMoveIndex ++;
+        $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));   
+        changeBackgroundOfTheDateHeader();
 
+    }
     function displayTimeBlocks () {
         $(".container").empty();
         console.log(moment());
@@ -54,14 +74,15 @@ $(document).ready(function() {
 
     function updateClock() {
         $(".clock").text(moment().format("dddd") + " " + moment().format("LL") + " " + moment().format("LTS"));
-        $("#currentDay").text(moment().format("LL"));
+        // $("#currentDay").text(moment().format("LL"));
     }
     updateClock();
     var clockInTheHeader = setInterval(updateClock, 1000);
-    // var timeBlockRefresh = setInterval(displayTimeBlocks, 1000);
+    var timeBlockRefresh = setInterval(displayTimeBlocks, 60000);
     displayTimeBlocks();
 
-
+    $(".left-button").on("click", moveDateBackward);
+    $(".right-button").on("click", moveDateForward);
 
 
 
