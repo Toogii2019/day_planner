@@ -40,8 +40,9 @@ $(document).ready(function() {
         for (i=0;i<10;i++) {
             var rowDiv = $("<div>");
             rowDiv.attr("class", "row hour");
-            rowDiv.attr("id", "row" + i);
+            // rowDiv.attr();
             var textArea = $("<textarea>");
+            textArea.attr("id", moment().hour(9+i).format("hA"));
             // textArea.attr("onfocus", "function() test {console.log('focusing')}");
             if (moment().isBefore(moment($("#currentDay").text()).hour(9+i))) {
                 console.log("Before")
@@ -65,15 +66,14 @@ $(document).ready(function() {
             // }
             var saveButton = $("<button>");
             saveButton.attr("class", "saveBtn");
-            saveButton.attr("value", moment().hour(9+i).format("h A"));
-
+            saveButton.attr("value", moment().hour(9+i).format("hA"));
             saveButton.text("Save");
 
             // var timeDesc = $("div").attr("class", "timeDesc");
             // timeDesc.text(timeOfTheDay.hour(9+i).minutes(0).format("LT"));
             // rowDiv.append(timeDesc);
             var rowText = $("<div>");
-            rowText.text(moment().hour(9+i).format("h A"));
+            rowText.text(moment().hour(9+i).format("hA"));
             rowText.attr("class", "rowtext");
             rowDiv.append(rowText);
             rowDiv.append(textArea);
@@ -99,6 +99,9 @@ $(document).ready(function() {
 
     $(".saveBtn").on("click", function(event) {
         console.log(event.target.value);
+        var textId = event.target.value;
+        var textContent = document.getElementById(textId).value;
+        console.log(textContent);
 
     })
 
