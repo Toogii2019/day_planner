@@ -23,14 +23,44 @@ $(document).ready(function() {
         $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));
         changeBackgroundOfTheDateHeader();
         displayTimeBlocks();
+        $(".saveBtn").on("click", function(event) {
+            console.log(event.target.value);
+            var textId = event.target.value;
+            var textContent = document.getElementById(textId).value;
+            console.log(textContent);
+            var calendarDay = moment($("#currentDay").text()).format("LL");
+            updateStorage(calendarDay, textId, textContent);
+        })
     
     }
+    
+    function updateTextAreas() {
+        var calendarDay = moment($("#currentDay").text()).format("LL");
+        for (i=0;i<10;i++) {
+            var textArea = document.getElementById(i);
+            textArea.textContent = localStorage.getItem(calendarDay + "-" + i);
+        }
+    }
+
+    function updateStorage(date, textId, textContent) {
+        console.log(textId);
+        localStorage.setItem(date + "-" + textId, textContent);
+    }
+
     function moveDateForward() {
         dateMoveIndex ++;
         $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));   
         changeBackgroundOfTheDateHeader();
         displayTimeBlocks();
-
+        $(".saveBtn").on("click", function(event) {
+            console.log(event.target.value);
+            var textId = event.target.value;
+            var textContent = document.getElementById(textId).value;
+            console.log(textContent);
+            var calendarDay = moment($("#currentDay").text()).format("LL");
+            updateStorage(calendarDay, textId, textContent);
+        })
+        
 
     }
     function displayTimeBlocks () {
@@ -42,7 +72,7 @@ $(document).ready(function() {
             rowDiv.attr("class", "row hour");
             // rowDiv.attr();
             var textArea = $("<textarea>");
-            textArea.attr("id", moment().hour(9+i).format("hA"));
+            textArea.attr("id", i);
             // textArea.attr("onfocus", "function() test {console.log('focusing')}");
             if (moment().isBefore(moment($("#currentDay").text()).hour(9+i))) {
                 console.log("Before")
@@ -55,18 +85,11 @@ $(document).ready(function() {
             else {
                 textArea.attr("class","time-block past");
                 console.log("After")
-
-
             }
-            // if (dateReal > dateOnCalendar) {
-            //     textArea.attr("class", "time-block past");
-            // }
-            // else if (dateReal < dateOnCalendar) {
-            //     textArea.attr("class", "time-block future"); 
-            // }
+
             var saveButton = $("<button>");
             saveButton.attr("class", "saveBtn");
-            saveButton.attr("value", moment().hour(9+i).format("hA"));
+            saveButton.attr("value", i);
             saveButton.text("Save");
 
             // var timeDesc = $("div").attr("class", "timeDesc");
@@ -80,7 +103,7 @@ $(document).ready(function() {
             rowDiv.append(saveButton);
             $(".container").append(rowDiv);
         }
-
+        updateTextAreas();
     }
 
     function updateClock() {
@@ -89,19 +112,19 @@ $(document).ready(function() {
     }
     updateClock();
     var clockInTheHeader = setInterval(updateClock, 1000);
-    var timeBlockRefresh = setInterval(displayTimeBlocks, 60000);
+    // var timeBlockRefresh = setInterval(displayTimeBlocks, 60000);
     displayTimeBlocks();
 
     $(".left-button").on("click", moveDateBackward);
     $(".right-button").on("click", moveDateForward);
-
-
 
     $(".saveBtn").on("click", function(event) {
         console.log(event.target.value);
         var textId = event.target.value;
         var textContent = document.getElementById(textId).value;
         console.log(textContent);
+        var calendarDay = moment($("#currentDay").text()).format("LL");
+        updateStorage(calendarDay, textId, textContent);
 
     })
 
