@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css" />
+    <title>Calendar</title>
+</head>
+<body>
+    <div id="calendar-app"></div>
+</body>
+<script>
+
+    const isWeekend = day => {
+        return true;
+    }
+
+    const calendar = document.querySelector("#calendar-app");
+    console.log(calendar);
+    for (day=1;day<31;day++) {
+        isWeekend(day);
+        calendar.insertAdjacentHTML("beforeend", `<div class="day">${day}</div>`);
+    }
+
+
+</script>
+</html>
