@@ -2,6 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  min-width:380px;
 }
 
 textarea{
@@ -11,13 +12,12 @@ textarea{
   color: #000000;
   border-left: 1px solid black;
   padding: 20px;
-  margin-left: 70px;
-  min-width: 1px;
+  margin-left: 20px;
   width: 70%;
 
 }
 nav {
-  margin-top: -30px;
+  margin-top: -10px;
   background: rgb(135, 179, 135);
   border-radius: 5px;
   padding: 10px;
@@ -36,13 +36,16 @@ nav {
 }
 
 .rowtext {
-  padding: 30px;
-  width: 15%;
-  text-align: left;
+  /* padding: 30px;
 
-  margin-right: -90px;
+  text-align: left;
+*/
+  text-align: left;  
+  width: 50px;
+  margin-right: -20px; 
   /* border: 1px solid; */
-  text-align: center;
+  padding: 30px;
+
 }
 
 .jumbotron {
@@ -67,12 +70,15 @@ nav {
   flex-direction: column;
   height: auto;
   width: 60vw;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;;
+  min-width:380px;
 }
 
 .hour {
@@ -114,7 +120,7 @@ nav {
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
-  width: 10%;
+  width: 50px;
 }
 
 .saveBtn i:hover {
@@ -124,4 +130,13 @@ nav {
 .btn {
   width: 80px;
   height: 30px;
+}
+
+footer {
+  border: 1px solid;
+  padding: 30px;
+  margin: 10px;
+  text-align: center;
+  background: rgb(109, 104, 104);
+  color: white;
 }

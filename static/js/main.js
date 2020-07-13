@@ -34,17 +34,18 @@ $(document).ready(function() {
     
     }
     
-    function updateTextAreas() {
+    function updateTextAreas(index) {
         var calendarDay = moment($("#currentDay").text()).format("LL");
-        for (i=0;i<10;i++) {
-            var textArea = document.getElementById(i);
-            textArea.textContent = localStorage.getItem(calendarDay + "-" + i);
-        }
+        console.log("Updating text areas");
+        var textArea = document.getElementById(i);
+        
+        textArea.value = localStorage.getItem(calendarDay + "-" + index);
     }
 
     function updateStorage(date, textId, textContent) {
         console.log(textId);
         localStorage.setItem(date + "-" + textId, textContent);
+        displayTimeBlocks();
     }
 
     function moveDateForward() {
@@ -60,50 +61,79 @@ $(document).ready(function() {
             var calendarDay = moment($("#currentDay").text()).format("LL");
             updateStorage(calendarDay, textId, textContent);
         })
+    }
+
+    function hideAlert(autoSaveAlert) {
+        var alertInterval = setTimeout(function() {
+            autoSaveAlert.setAttribute("class", "alert alert-success alert-dismissible fade")
+            clearInterval(alertInterval);
+            
+        }, 1500);
+    }
+
+    function displayAlert() {
+        var autoSaveAlert = document.getElementById("saveAlert");
+        autoSaveAlert.setAttribute("class", "alert alert-success alert-dismissible show fade");
+        hideAlert(autoSaveAlert);
+    }
+
+    function autoSave() {
+        let calendarDay = moment($("#currentDay").text()).format("LL");
+        console.log("Autosaving");
+        displayAlert();
+        for (i=0;i<10;i++) {
+            let textArea = document.getElementById(i);
+            updateStorage(calendarDay, i, textArea.value);
+        }
+        displayTimeBlocks();
+    }
+
+    function displayTimeBlocks () {
+        if ($(".row").length === 0) {
+            console.log("Creating");
+
+            $(".container").empty();
+            console.log(moment());
+
+            for (i=0;i<10;i++) {
+                var rowDiv = $("<div>");
+                rowDiv.attr("class", "row hour");
+                var textArea = $("<textarea>");
+                textArea.attr("id", i);
         
 
-    }
-    function displayTimeBlocks () {
-        $(".container").empty();
-        console.log(moment());
+                var saveButton = $("<button>");
+                saveButton.attr("class", "saveBtn glyphicon glyphicon-floppy-disk");
+                saveButton.attr("value", i);
+                saveButton.text("Save");
 
+                var rowText = $("<div>");
+                rowText.text(moment().hour(9+i).format("hA"));
+                rowText.attr("class", "rowtext");
+                rowDiv.append(rowText);
+                rowDiv.append(textArea);
+                rowDiv.append(saveButton);
+                $(".container").append(rowDiv);
+            }
+        }
+        console.log("Painting")
         for (i=0;i<10;i++) {
-            var rowDiv = $("<div>");
-            rowDiv.attr("class", "row hour");
-            // rowDiv.attr();
-            var textArea = $("<textarea>");
-            textArea.attr("id", i);
-            // textArea.attr("onfocus", "function() test {console.log('focusing')}");
+            let textArea = document.getElementById(i);
             if (moment().isBefore(moment($("#currentDay").text()).hour(9+i))) {
                 console.log("Before")
-                textArea.attr("class","time-block future");
+                textArea.setAttribute("class","time-block future lead");
             }
             else if (moment().isSame(moment($("#currentDay").text()).hour(9+i))) {
-                textArea.attr("class","time-block present");
+                textArea.setAttribute("class","time-block present lead");
                 console.log("Same")
             }
             else {
-                textArea.attr("class","time-block past");
+                textArea.setAttribute("class","time-block past lead");
                 console.log("After")
             }
-
-            var saveButton = $("<button>");
-            saveButton.attr("class", "saveBtn glyphicon glyphicon-floppy-disk");
-            saveButton.attr("value", i);
-            saveButton.text("Save");
-
-            // var timeDesc = $("div").attr("class", "timeDesc");
-            // timeDesc.text(timeOfTheDay.hour(9+i).minutes(0).format("LT"));
-            // rowDiv.append(timeDesc);
-            var rowText = $("<div>");
-            rowText.text(moment().hour(9+i).format("hA"));
-            rowText.attr("class", "rowtext");
-            rowDiv.append(rowText);
-            rowDiv.append(textArea);
-            rowDiv.append(saveButton);
-            $(".container").append(rowDiv);
+            updateTextAreas(i);
         }
-        updateTextAreas();
+        
     }
 
     function updateClock() {
@@ -112,7 +142,7 @@ $(document).ready(function() {
     }
     updateClock();
     var clockInTheHeader = setInterval(updateClock, 1000);
-    // var timeBlockRefresh = setInterval(displayTimeBlocks, 60000);
+    var timeBlockRefresh = setInterval(autoSave, 60000);
     displayTimeBlocks();
 
     $(".left-button").on("click", moveDateBackward);
