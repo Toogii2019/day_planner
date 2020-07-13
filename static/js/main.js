@@ -122,6 +122,7 @@ $(document).ready(function() {
 
             if (moment().isBefore(moment($("#currentDay").text()), 'day')) {
                 textArea.setAttribute("class","time-block future");
+                updateTextAreas(i);
                 continue;
             }
 
