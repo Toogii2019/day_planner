@@ -70,6 +70,10 @@ nav {
   
 }
 
+.weekend {
+  background: rgb(222, 228, 135);
+}
+
 .row {
   display: flex;
   flex-wrap: nowrap;

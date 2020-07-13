@@ -4,6 +4,10 @@ $(document).ready(function() {
     $("#currentDay").text(moment().format("LL"));
     var dateMoveIndex = 0;
     function changeBackgroundOfTheDateHeader() {
+        if (isWeekend()) {
+            $("#currentDay").attr("class", "weekend");
+            return;
+        }
         if (isPresentDay()) {
             console.log("Today");
             $("#currentDay").attr("class", "present");
@@ -68,22 +72,22 @@ $(document).ready(function() {
         return false;
     }
 
-    function isPresentHour() {
-        if (moment().isSame(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+    function isPresentHour(index) {
+        if (moment().isSame(moment($("#currentDay").text()).hour(9+index), 'hour')) {
             return true;
         }
         return false;
     }
  
-    function isFutureHour() {
-        if (moment().isBefore(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+    function isFutureHour(index) {
+        if (moment().isBefore(moment($("#currentDay").text()).hour(9+index), 'hour')) {
             return true;
         }
         return false;
     }
 
-    function isPastHour() {
-        if (moment().isAfter(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+    function isPastHour(index) {
+        if (moment().isAfter(moment($("#currentDay").text()).hour(9+index), 'hour')) {
             return true;
         }
         return false;
@@ -184,14 +188,14 @@ $(document).ready(function() {
             }
             
             else if (isPresentDay()) {
-                if (isPresentHour()) {
+                if (isPresentHour(i)) {
                     textArea.setAttribute("class","time-block present");
                 }
-                else if (isFutureHour()) {
+                else if (isFutureHour(i)) {
                     textArea.setAttribute("class","time-block future");
                     console.log("Same")
                 }
-                else if (isPastHour()) { 
+                else if (isPastHour(i)) { 
                     textArea.setAttribute("class","time-block past");
                 }
             }
