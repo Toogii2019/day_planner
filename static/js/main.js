@@ -47,6 +47,9 @@ $(document).ready(function() {
 
     function updateStorage(date, textId, textContent) {
         console.log(textId);
+        if (isWeekend()) {
+            return;
+        }
         localStorage.setItem(date + "-" + textId, textContent);
         displayTimeBlocks();
     }
@@ -177,10 +180,10 @@ $(document).ready(function() {
             if (isWeekend()) {
                 textArea.setAttribute("class","time-block weekend");
                 textArea.value = "Weekend";
+                textArea.disabled = true;
                 continue;
             } 
-
-
+            textArea.disabled = false;
             if (isFutureDay()) {
                 textArea.setAttribute("class","time-block future");
                 updateTextAreas(i);
