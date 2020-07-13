@@ -71,16 +71,19 @@ $(document).ready(function() {
         }, 1500);
     }
 
-    function displayAlert() {
+    function displayAlert(saveMsg) {
+        console.log(saveMsg);
         var autoSaveAlert = document.getElementById("saveAlert");
+        autoSaveAlert.textContent = saveMsg;
         autoSaveAlert.setAttribute("class", "alert alert-success alert-dismissible show fade");
         hideAlert(autoSaveAlert);
     }
 
+
     function autoSave() {
         let calendarDay = moment($("#currentDay").text()).format("LL");
         console.log("Autosaving");
-        displayAlert();
+        displayAlert("Autosaving");
         for (i=0;i<10;i++) {
             let textArea = document.getElementById(i);
             updateStorage(calendarDay, i, textArea.value);
@@ -159,12 +162,14 @@ $(document).ready(function() {
     $(".right-button").on("click", moveDateForward);
 
     $(".saveBtn").on("click", function(event) {
+        displayAlert("Saved Successfully");
         console.log(event.target.value);
         var textId = event.target.value;
         var textContent = document.getElementById(textId).value;
         console.log(textContent);
         var calendarDay = moment($("#currentDay").text()).format("LL");
         updateStorage(calendarDay, textId, textContent);
+        
 
     })
 
