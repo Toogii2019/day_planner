@@ -76,7 +76,9 @@ nav {
 }
 
 .weekend {
-  background: rgb(222, 228, 135);
+  background: ;
+  background: linear-gradient(to right, rgb(222, 228, 135), rgb(245, 245, 243));
+
 }
 
 .row {
@@ -105,8 +107,9 @@ nav {
 }
 
 .past {
-  background-color: #d3d3d3;
+  background: linear-gradient(to right, rgb(150, 145, 145), rgba(255, 255, 255, 0.7));
   color: white;
+  
 }
 .control {
   display: flex;
@@ -115,12 +118,13 @@ nav {
 }
 
 .present {
-  background-color: #ff6961;
+  /* background-color: #ff6961; */
   color: white;
+  background: linear-gradient(to right, rgb(245, 63, 63), rgba(247, 221, 221, 0.7));
 }
 
 .future {
-  background-color: #77dd77;
+  background: linear-gradient(to right, rgb(104, 201, 75), rgba(237, 247, 234, 0.7));
   color: white;
 }
 
@@ -138,8 +142,10 @@ nav {
   transition: all .3s ease-in-out;
 }
 .btn {
-  width: 80px;
+  width: 100px;
   height: 30px;
+  background: rgba(135, 226, 233, 0.8);
+  color: black;
 }
 
 footer {
