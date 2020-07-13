@@ -119,17 +119,26 @@ $(document).ready(function() {
         console.log("Painting")
         for (i=0;i<10;i++) {
             let textArea = document.getElementById(i);
-            if (moment().isBefore(moment($("#currentDay").text()).hour(9+i))) {
-                console.log("Before")
+
+            if (moment().isBefore(moment($("#currentDay").text()), 'day')) {
                 textArea.setAttribute("class","time-block future");
+                continue;
             }
-            else if (moment().isSame(moment($("#currentDay").text()).hour(9+i))) {
-                textArea.setAttribute("class","time-block present");
-                console.log("Same")
+
+            else if (moment().isSame(moment($("#currentDay").text()), 'day')) {
+                if (moment().isSame(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+                    textArea.setAttribute("class","time-block present");
+                }
+                else if (moment().isBefore(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+                    textArea.setAttribute("class","time-block future");
+                    console.log("Same")
+                }
+                else if (moment().isAfter(moment($("#currentDay").text()).hour(9+i), 'hour')) { 
+                    textArea.setAttribute("class","time-block past");
+                }
             }
-            else {
+            else if (moment().isAfter(moment($("#currentDay").text()), 'day')) {
                 textArea.setAttribute("class","time-block past");
-                console.log("After")
             }
             updateTextAreas(i);
         }
