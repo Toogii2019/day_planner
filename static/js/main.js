@@ -167,7 +167,7 @@ $(document).ready(function() {
     }
     updateClock();
     var clockInTheHeader = setInterval(updateClock, 1000);
-    var timeBlockRefresh = setInterval(autoSave, 60000);
+    var timeBlockRefresh = setInterval(displayTimeBlocks, 60000);
     displayTimeBlocks();
 
     $(".left-button").on("click", moveDateBackward);
