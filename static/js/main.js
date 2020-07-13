@@ -121,14 +121,14 @@ $(document).ready(function() {
             let textArea = document.getElementById(i);
             if (moment().isBefore(moment($("#currentDay").text()).hour(9+i))) {
                 console.log("Before")
-                textArea.setAttribute("class","time-block future lead");
+                textArea.setAttribute("class","time-block future");
             }
             else if (moment().isSame(moment($("#currentDay").text()).hour(9+i))) {
-                textArea.setAttribute("class","time-block present lead");
+                textArea.setAttribute("class","time-block present");
                 console.log("Same")
             }
             else {
-                textArea.setAttribute("class","time-block past lead");
+                textArea.setAttribute("class","time-block past");
                 console.log("After")
             }
             updateTextAreas(i);
