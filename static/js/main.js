@@ -162,7 +162,8 @@ $(document).ready(function() {
     }
 
     function updateClock() {
-        $(".clock").text(moment().format("dddd") + " " + moment().format("LL") + " " + moment().format("LTS"));
+        $(".clock").text(moment().format("LTS"));
+        $(".date").text(moment().format("dddd DD MMMM YYYY"));
         // $("#currentDay").text(moment().format("LL"));
     }
     updateClock();

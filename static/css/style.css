@@ -21,10 +21,14 @@ nav {
   background: rgb(135, 179, 135);
   border-radius: 5px;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Lobster";
 }
 
 
-.clock {
+.clock, .date {
   width: auto;
   height: 50px;
   display:flex;
@@ -33,6 +37,7 @@ nav {
   border-radius: 5px;
   padding:30px;
   margin-top: 10px;
+  font-size: 30px;
 }
 
 .rowtext {
