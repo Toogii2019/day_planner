@@ -88,7 +88,7 @@ $(document).ready(function() {
             }
 
             var saveButton = $("<button>");
-            saveButton.attr("class", "saveBtn");
+            saveButton.attr("class", "saveBtn glyphicon glyphicon-floppy-disk");
             saveButton.attr("value", i);
             saveButton.text("Save");
 
