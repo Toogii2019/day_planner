@@ -3,13 +3,12 @@ $(document).ready(function() {
     const today = moment().format("LL");
     $("#currentDay").text(moment().format("LL"));
     var dateMoveIndex = 0;
-
     function changeBackgroundOfTheDateHeader() {
-        if (moment($("#currentDay").text()).isSame(moment().format("MMMM DD YYYY"))) {
+        if (isPresentDay()) {
             console.log("Today");
             $("#currentDay").attr("class", "present");
         }
-        else if (moment($("#currentDay").text()).isBefore(moment().format("MMMM DD YYYY"))) {
+        else if (isPastDay()) {
             $("#currentDay").attr("class", "past");
         }
         else {
@@ -25,17 +24,17 @@ $(document).ready(function() {
         displayTimeBlocks();
         $(".saveBtn").on("click", function(event) {
             console.log(event.target.value);
-            var textId = event.target.value;
-            var textContent = document.getElementById(textId).value;
+            let textId = event.target.value;
+            let textContent = document.getElementById(textId).value;
             console.log(textContent);
-            var calendarDay = moment($("#currentDay").text()).format("LL");
+            let calendarDay = moment($("#currentDay").text()).format("LL");
             updateStorage(calendarDay, textId, textContent);
         })
     
     }
     
     function updateTextAreas(index) {
-        var calendarDay = moment($("#currentDay").text()).format("LL");
+        let calendarDay = moment($("#currentDay").text()).format("LL");
         console.log("Updating text areas");
         var textArea = document.getElementById(i);
         
@@ -46,6 +45,55 @@ $(document).ready(function() {
         console.log(textId);
         localStorage.setItem(date + "-" + textId, textContent);
         displayTimeBlocks();
+    }
+
+    function isWeekend() {
+        if (moment($("#currentDay").text()).days() === 0 || moment($("#currentDay").text()).days() === 6) {
+            return true;
+        }
+        return false;
+    }
+
+    function isFutureDay() {
+        if (moment().isBefore(moment($("#currentDay").text()), 'day')) {
+            return true;
+        }
+        return false;
+    }
+
+    function isPresentDay() {
+        if (moment().isSame(moment($("#currentDay").text()), 'day')) {
+            return true;
+        }
+        return false;
+    }
+
+    function isPresentHour() {
+        if (moment().isSame(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+            return true;
+        }
+        return false;
+    }
+ 
+    function isFutureHour() {
+        if (moment().isBefore(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+            return true;
+        }
+        return false;
+    }
+
+    function isPastHour() {
+        if (moment().isAfter(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+            return true;
+        }
+        return false;
+    }
+
+    function isPastDay() {
+        if (moment().isAfter(moment($("#currentDay").text()), 'day')) {
+            return true;
+        }
+        return false;
     }
 
     function moveDateForward() {
@@ -122,26 +170,32 @@ $(document).ready(function() {
         console.log("Painting")
         for (i=0;i<10;i++) {
             let textArea = document.getElementById(i);
+            if (isWeekend()) {
+                textArea.setAttribute("class","time-block weekend");
+                textArea.value = "Weekend";
+                continue;
+            } 
 
-            if (moment().isBefore(moment($("#currentDay").text()), 'day')) {
+
+            if (isFutureDay()) {
                 textArea.setAttribute("class","time-block future");
                 updateTextAreas(i);
                 continue;
             }
-
-            else if (moment().isSame(moment($("#currentDay").text()), 'day')) {
-                if (moment().isSame(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+            
+            else if (isPresentDay()) {
+                if (isPresentHour()) {
                     textArea.setAttribute("class","time-block present");
                 }
-                else if (moment().isBefore(moment($("#currentDay").text()).hour(9+i), 'hour')) {
+                else if (isFutureHour()) {
                     textArea.setAttribute("class","time-block future");
                     console.log("Same")
                 }
-                else if (moment().isAfter(moment($("#currentDay").text()).hour(9+i), 'hour')) { 
+                else if (isPastHour()) { 
                     textArea.setAttribute("class","time-block past");
                 }
             }
-            else if (moment().isAfter(moment($("#currentDay").text()), 'day')) {
+            else if (isPastDay()) {
                 textArea.setAttribute("class","time-block past");
             }
             updateTextAreas(i);
@@ -169,8 +223,5 @@ $(document).ready(function() {
         console.log(textContent);
         var calendarDay = moment($("#currentDay").text()).format("LL");
         updateStorage(calendarDay, textId, textContent);
-        
-
     })
-
 })
