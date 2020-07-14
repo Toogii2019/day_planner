@@ -1,4 +1,5 @@
-function isWeekend() {
+function isWeekend(dateObj) {
+
     if (moment($("#currentDay").text()).days() === 0 || moment($("#currentDay").text()).days() === 6) {
         return true;
     }

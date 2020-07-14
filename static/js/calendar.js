@@ -13,7 +13,18 @@ function goToCalendar() {
         let firstDay = moment($("#currentDay").text()).startOf('month');
         let lastDay = moment($("#currentDay").text()).endOf('month');
         while (!firstDay.isAfter(lastDay)) {
-            calendar.insertAdjacentHTML("beforeend", `<div class="day">${firstDay.format("ddd DD")}</div>`);
+            let day = firstDay.format("DD");
+            let month = firstDay.format("MMMM");
+            let year = firstDay.format("YYYY");
+            let dateChosen = month + " " + day + "," + " " + year;
+            let date = moment(dateChosen);
+
+            if (isWeekend(date)) {
+                calendar.insertAdjacentHTML("beforeend", `<div class="day weekend">${firstDay.format("ddd DD")}</div>`);
+            }
+            else {
+                calendar.insertAdjacentHTML("beforeend", `<div class="day">${firstDay.format("ddd DD")}</div>`);
+            }
             firstDay.add(1, 'day');
         }
     }
