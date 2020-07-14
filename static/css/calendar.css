@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-
+    padding: 30px;
 }
 .day:hover {
     background: rgb(156, 156, 190);
