@@ -46,3 +46,17 @@ function isPastDay() {
     }
     return false;
 }
+
+function isPresentMonth() {
+    if (moment().isSame(moment($("#currentDay").text()), 'month')) {
+        return true;
+    }
+    return false;
+}
+
+function isPastMonth() {
+    if (moment().isAfter(moment($("#currentDay").text()), 'month')) {
+        return true;
+    }
+    return false;
+}

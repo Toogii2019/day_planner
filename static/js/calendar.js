@@ -16,6 +16,8 @@ function goToCalendar() {
     
     buildCalendar();
 
+    changeMonthBackground();
+
     function buildCalendar() {
         let firstDay = moment($("#currentDay")).startOf('month');
         let lastDay = moment($("#currentDay")).endOf('month');
@@ -35,6 +37,18 @@ function goToCalendar() {
 
     }
     $(".day").on("click", jumpToDate)
+
+    function changeMonthBackground() {
+        if (isPresentMonth()) {
+            $("#currentDay").attr("class", "present");
+        }
+        else if (isPastMonth()) {
+            $("#currentDay").attr("class", "past");
+        }
+        else {
+            $("#currentDay").attr("class", "future");
+        }
+    }
 
 }
 
