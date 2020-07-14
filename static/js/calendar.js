@@ -17,9 +17,11 @@ function goToCalendar() {
         console.log(firstDay.format());
         console.log(closestWeekend.format());
         console.log(gap);
-        for (i=0;i<gap;i++) {
-            calendar.insertAdjacentHTML("beforeend", `<div class="day disabled">${closestWeekend.format("ddd DD")}</div>`);
-            closestWeekend.add(1, 'day');
+        if (gap < 7) {
+            for (i=0;i<gap;i++) {
+                calendar.insertAdjacentHTML("beforeend", `<div class="day disabled">${closestWeekend.format("ddd DD")}</div>`);
+                closestWeekend.add(1, 'day');
+            }
         }
         while (!firstDay.isAfter(lastDay)) {
             let day = firstDay.format("DD");
