@@ -19,7 +19,7 @@ function goToCalendar() {
         console.log(gap);
         if (gap < 7) {
             for (i=0;i<gap;i++) {
-                calendar.insertAdjacentHTML("beforeend", `<div class="day disabled">${closestWeekend.format("ddd DD")}</div>`);
+                calendar.insertAdjacentHTML("beforeend", `<div class="day past-month">${closestWeekend.format("ddd DD")}</div>`);
                 closestWeekend.add(1, 'day');
             }
         }
