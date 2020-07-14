@@ -18,7 +18,7 @@ function goToCalendar() {
         console.log(gap);
         if (gap < 7) {
             for (i=0;i<gap;i++) {
-                calendarAppDiv.append(`<div class='day past-month'>${closestWeekend.format("ddd DD")}</div>`);
+                calendarAppDiv.append(`<div class='day past-month' data-date='past-month'>${closestWeekend.format("ddd DD")}</div>`);
                 closestWeekend.add(1, 'day');
             }
         }
@@ -47,6 +47,10 @@ function goToCalendar() {
         }
     }
     function jumpToDate(event) {
+        console.log(event.target.getAttribute("data-date"));
+        if (event.target.getAttribute("data-date") == "past-month") {
+            return;
+        }
         let day = event.target.textContent.split(" ")[1];
         let month = $("#currentDay").text().split(" ")[0];
         let year = $("#currentDay").text().split(" ")[1];
