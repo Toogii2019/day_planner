@@ -5,7 +5,6 @@ function goToCalendar() {
     calendarAppDiv.attr("id", "calendar-app");
     $(".container").append(calendarAppDiv);
     $("#currentDay").text(moment($("#currentDay").text()).format("MMM YYYY"));
-    const calendar = document.querySelector("#calendar-app");
     buildCalendar();
     changeMonthBackground();
 
@@ -19,7 +18,7 @@ function goToCalendar() {
         console.log(gap);
         if (gap < 7) {
             for (i=0;i<gap;i++) {
-                calendar.insertAdjacentHTML("beforeend", `<div class="day past-month">${closestWeekend.format("ddd DD")}</div>`);
+                calendarAppDiv.append(`<div class='day past-month'>${closestWeekend.format("ddd DD")}</div>`);
                 closestWeekend.add(1, 'day');
             }
         }
@@ -30,19 +29,19 @@ function goToCalendar() {
             let dateChosen = month + " " + day + "," + " " + year;
 
             if (isWeekend(dateChosen)) {
-                calendar.insertAdjacentHTML("beforeend", `<div class="day weekend">${firstDay.format("ddd DD")}</div>`);
+                calendarAppDiv.append(`<div class="day weekend">${firstDay.format("ddd DD")}</div>`);
             }
             else if (isFutureDay(dateChosen)) {
-                calendar.insertAdjacentHTML("beforeend", `<div class="day future">${firstDay.format("ddd DD")}</div>`);
+                calendarAppDiv.append(`<div class="day future">${firstDay.format("ddd DD")}</div>`);
             }
             else if (isPresentDay(dateChosen)) {
-                calendar.insertAdjacentHTML("beforeend", `<div class="day present">${firstDay.format("ddd DD")}</div>`);
+                calendarAppDiv.append(`<div class="day present">${firstDay.format("ddd DD")}</div>`);
             }
             else if (isPastDay(dateChosen)) {
-                calendar.insertAdjacentHTML("beforeend", `<div class="day past">${firstDay.format("ddd DD")}</div>`);
+                calendarAppDiv.append(`<div class="day past">${firstDay.format("ddd DD")}</div>`);
             }
             else {
-                calendar.insertAdjacentHTML("beforeend", `<div class="day">${firstDay.format("ddd DD")}</div>`);
+                calendarAppDiv.append(`<div class="day">${firstDay.format("ddd DD")}</div>`);
             }
             firstDay.add(1, 'day');
         }
