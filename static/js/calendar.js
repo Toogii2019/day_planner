@@ -17,9 +17,8 @@ function goToCalendar() {
             let month = firstDay.format("MMMM");
             let year = firstDay.format("YYYY");
             let dateChosen = month + " " + day + "," + " " + year;
-            let date = moment(dateChosen);
 
-            if (isWeekend(date)) {
+            if (isWeekend(dateChosen)) {
                 calendar.insertAdjacentHTML("beforeend", `<div class="day weekend">${firstDay.format("ddd DD")}</div>`);
             }
             else {

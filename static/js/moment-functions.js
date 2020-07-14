@@ -1,12 +1,12 @@
 function isWeekend(dateObj) {
 
-    if (moment($("#currentDay").text()).days() === 0 || moment($("#currentDay").text()).days() === 6) {
+    if (moment(dateObj).days() === 0 || moment(dateObj).days() === 6) {
         return true;
     }
     return false;
 }
 
-function isFutureDay() {
+function isFutureDay(dateObj) {
     if (moment().isBefore(moment($("#currentDay").text()), 'day')) {
         return true;
     }

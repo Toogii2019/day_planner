@@ -8,14 +8,15 @@ function showDates (today) {
     var presentActivity;
     changeBackgroundOfTheDateHeader();
     function changeBackgroundOfTheDateHeader() {
-        if (isWeekend()) {
+        let dateObj = $("#currentDay").text();
+        if (isWeekend(dateObj)) {
             $("#currentDay").attr("class", "weekend");
             return;
         }
-        if (isPresentDay()) {
+        if (isPresentDay(dateObj)) {
             $("#currentDay").attr("class", "present");
         }
-        else if (isPastDay()) {
+        else if (isPastDay(dateObj)) {
             $("#currentDay").attr("class", "past");
         }
         else {
@@ -74,7 +75,8 @@ function showDates (today) {
     }
 
     function updateStorage(date, textId, textContent) {
-        if (isWeekend()) {
+        let dateObj = $("#currentDay").text();
+        if (isWeekend(dateObj)) {
             return;
         }
         localStorage.setItem(date + "-" + textId, textContent);
@@ -135,20 +137,22 @@ function showDates (today) {
         }
         for (i=0;i<10;i++) {
             let textArea = document.getElementById(i);
-            if (isWeekend()) {
+            let dateObj = $("#currentDay").text();
+            if (isWeekend(dateObj)) {
                 textArea.setAttribute("class","time-block weekend");
                 textArea.value = "Weekend";
                 textArea.disabled = true;
                 continue;
             } 
             textArea.disabled = false;
-            if (isFutureDay()) {
+            
+            if (isFutureDay(dateObj)) {
                 textArea.setAttribute("class","time-block future");
                 updateTextAreas(i);
                 continue;
             }
             
-            else if (isPresentDay()) {
+            else if (isPresentDay(dateObj)) {
                 if (isPresentHour(i)) {
                     textArea.setAttribute("class","time-block present");
                     presentHour = 9+i;
@@ -160,7 +164,7 @@ function showDates (today) {
                     textArea.setAttribute("class","time-block past");
                 }
             }
-            else if (isPastDay()) {
+            else if (isPastDay(dateObj)) {
                 textArea.setAttribute("class","time-block past");
             }
             updateTextAreas(i);
