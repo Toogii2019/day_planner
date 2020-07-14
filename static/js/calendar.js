@@ -1,5 +1,4 @@
 function goToCalendar() {
-    console.log("Going to calendar");
     $(".container").empty();
 
     let calendarAppDiv = $("<div>");
@@ -12,7 +11,6 @@ function goToCalendar() {
     // }
 
     const calendar = document.querySelector("#calendar-app");
-    console.log(calendar);
     
     buildCalendar();
 
@@ -26,17 +24,11 @@ function goToCalendar() {
         }
     }
     function jumpToDate(event) {
-        console.log("Done");
         let day = event.target.textContent.split(" ")[1];
-        console.log(day);
         let month = $("#currentDay").text().split(" ")[0];
-        console.log(month);
         let year = $("#currentDay").text().split(" ")[1];
-        console.log(year);
         let dateChosen = month + " " + day + "," + " " + year;
-        console.log(dateChosen);
         let date = moment(dateChosen);
-        console.log(date.format("LL"));
         showDates(date.format("LL"));
 
     }

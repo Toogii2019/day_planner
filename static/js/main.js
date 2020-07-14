@@ -1,7 +1,6 @@
 $(document).ready(showDates(moment().format("LL")));
 
 function showDates (today) {
-    console.log(moment());
     $("#currentDay").text(today);
     var dateMoveIndex = moment(today).diff(moment(), 'day');
     var presentHour;
@@ -13,7 +12,6 @@ function showDates (today) {
             return;
         }
         if (isPresentDay()) {
-            console.log("Today");
             $("#currentDay").attr("class", "present");
         }
         else if (isPastDay()) {
@@ -25,35 +23,44 @@ function showDates (today) {
     }
 
     function moveDateBackward() {
-        console.log("moving back");
+        if ($("#currentDay").text().split(" ").length === 2) {
+        }
         dateMoveIndex --;
         $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));
         changeBackgroundOfTheDateHeader();
         displayTimeBlocks();
         $(".saveBtn").on("click", function(event) {
-            console.log(event.target.value);
             let textId = event.target.value;
             let textContent = document.getElementById(textId).value;
-            console.log(textContent);
             let calendarDay = moment($("#currentDay").text()).format("LL");
             updateStorage(calendarDay, textId, textContent);
         })
     
     }
+    function moveDateForward() {
+        dateMoveIndex ++;
+        $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));   
+        changeBackgroundOfTheDateHeader();
+        displayTimeBlocks();
+        $(".saveBtn").on("click", function(event) {
+            var textId = event.target.value;
+            var textContent = document.getElementById(textId).value;
+            var calendarDay = moment($("#currentDay").text()).format("LL");
+            updateStorage(calendarDay, textId, textContent);
+        })
+    }
+
     
     function updateTextAreas(index) {
         let calendarDay = moment($("#currentDay").text()).format("LL");
-        console.log("Updating text areas");
         var textArea = document.getElementById(i);
         textArea.value = localStorage.getItem(calendarDay + "-" + index);
         if (presentHour - 9 === i) {
             presentActivity = textArea.value;
-            console.log("Now - ", presentActivity);
         }
     }
 
     function updateStorage(date, textId, textContent) {
-        console.log(textId);
         if (isWeekend()) {
             return;
         }
@@ -61,20 +68,6 @@ function showDates (today) {
         displayTimeBlocks();
     }
 
-    function moveDateForward() {
-        dateMoveIndex ++;
-        $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));   
-        changeBackgroundOfTheDateHeader();
-        displayTimeBlocks();
-        $(".saveBtn").on("click", function(event) {
-            console.log(event.target.value);
-            var textId = event.target.value;
-            var textContent = document.getElementById(textId).value;
-            console.log(textContent);
-            var calendarDay = moment($("#currentDay").text()).format("LL");
-            updateStorage(calendarDay, textId, textContent);
-        })
-    }
 
     function hideAlert(autoSaveAlert) {
         var alertInterval = setTimeout(function() {
@@ -85,7 +78,6 @@ function showDates (today) {
     }
 
     function displayAlert(saveMsg) {
-        console.log(saveMsg);
         var autoSaveAlert = document.getElementById("saveAlert");
         autoSaveAlert.textContent = saveMsg;
         autoSaveAlert.setAttribute("class", "alert alert-success alert-dismissible show fade");
@@ -95,7 +87,6 @@ function showDates (today) {
 
     function autoSave() {
         let calendarDay = moment($("#currentDay").text()).format("LL");
-        console.log("Autosaving");
         displayAlert("Autosaving");
         for (i=0;i<10;i++) {
             let textArea = document.getElementById(i);
@@ -106,10 +97,8 @@ function showDates (today) {
 
     function displayTimeBlocks () {
         if ($(".row").length === 0) {
-            console.log("Creating");
 
             $(".container").empty();
-            console.log(moment());
 
             for (i=0;i<10;i++) {
                 var rowDiv = $("<div>");
@@ -131,7 +120,6 @@ function showDates (today) {
                 $(".container").append(rowDiv);
             }
         }
-        console.log("Painting")
         for (i=0;i<10;i++) {
             let textArea = document.getElementById(i);
             if (isWeekend()) {
@@ -151,11 +139,9 @@ function showDates (today) {
                 if (isPresentHour(i)) {
                     textArea.setAttribute("class","time-block present");
                     presentHour = 9+i;
-                    console.log("Now time is ", presentHour);
                 }
                 else if (isFutureHour(i)) {
                     textArea.setAttribute("class","time-block future");
-                    console.log("Same")
                 }
                 else if (isPastHour(i)) { 
                     textArea.setAttribute("class","time-block past");
@@ -184,10 +170,8 @@ function showDates (today) {
 
     $(".saveBtn").on("click", function(event) {
         displayAlert("Saved Successfully");
-        console.log(event.target.value);
         var textId = event.target.value;
         var textContent = document.getElementById(textId).value;
-        console.log(textContent);
         var calendarDay = moment($("#currentDay").text()).format("LL");
         updateStorage(calendarDay, textId, textContent);
     })
