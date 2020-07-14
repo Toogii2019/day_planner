@@ -3,6 +3,8 @@ $(document).ready(function() {
     const today = moment().format("LL");
     $("#currentDay").text(moment().format("LL"));
     var dateMoveIndex = 0;
+    var presentHour;
+    var presentActivity;
     function changeBackgroundOfTheDateHeader() {
         if (isWeekend()) {
             $("#currentDay").attr("class", "weekend");
@@ -41,8 +43,11 @@ $(document).ready(function() {
         let calendarDay = moment($("#currentDay").text()).format("LL");
         console.log("Updating text areas");
         var textArea = document.getElementById(i);
-        
         textArea.value = localStorage.getItem(calendarDay + "-" + index);
+        if (presentHour - 9 === i) {
+            presentActivity = textArea.value;
+            console.log("Now - ", presentActivity);
+        }
     }
 
     function updateStorage(date, textId, textContent) {
@@ -110,7 +115,6 @@ $(document).ready(function() {
                 var textArea = $("<textarea>");
                 textArea.attr("id", i);
         
-
                 var saveButton = $("<button>");
                 saveButton.attr("class", "saveBtn glyphicon glyphicon-floppy-disk");
                 saveButton.attr("value", i);
@@ -144,6 +148,8 @@ $(document).ready(function() {
             else if (isPresentDay()) {
                 if (isPresentHour(i)) {
                     textArea.setAttribute("class","time-block present");
+                    presentHour = 9+i;
+                    console.log("Now time is ", presentHour);
                 }
                 else if (isFutureHour(i)) {
                     textArea.setAttribute("class","time-block future");
