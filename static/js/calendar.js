@@ -11,7 +11,16 @@ function goToCalendar() {
 
     function buildCalendar() {
         let firstDay = moment($("#currentDay").text()).startOf('month');
+        let closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
         let lastDay = moment($("#currentDay").text()).endOf('month');
+        let gap = firstDay.diff(closestWeekend, 'days');
+        console.log(firstDay.format());
+        console.log(closestWeekend.format());
+        console.log(gap);
+        for (i=0;i<gap;i++) {
+            calendar.insertAdjacentHTML("beforeend", `<div class="day disabled">${closestWeekend.format("ddd DD")}</div>`);
+            closestWeekend.add(1, 'day');
+        }
         while (!firstDay.isAfter(lastDay)) {
             let day = firstDay.format("DD");
             let month = firstDay.format("MMMM");
