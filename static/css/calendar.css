@@ -1,0 +1,16 @@
+#calendar-app {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 600px;
+    /* border: 1px solid; */
+    width: 80vw;
+}
+
+.day {
+    /* padding: 100px; */
+    border: 1px solid rgb(216, 233, 216);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
