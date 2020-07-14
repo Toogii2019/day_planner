@@ -3,6 +3,7 @@ $(document).ready(showDates(moment().format("LL")));
 function showDates (today) {
     $("#currentDay").text(today);
     var dateMoveIndex = moment(today).diff(moment(), 'day');
+    var monthMoveIndex = moment(today).diff(moment(), 'month');
     var presentHour;
     var presentActivity;
     changeBackgroundOfTheDateHeader();
@@ -24,6 +25,11 @@ function showDates (today) {
 
     function moveDateBackward() {
         if ($("#currentDay").text().split(" ").length === 2) {
+            console.log($("#currentDay").text().split(" ").length)
+            monthMoveIndex--;
+            $("#currentDay").text(moment().add(monthMoveIndex, 'months').format("LL"));
+            goToCalendar();
+            return;
         }
         dateMoveIndex --;
         $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));
@@ -38,6 +44,13 @@ function showDates (today) {
     
     }
     function moveDateForward() {
+        if ($("#currentDay").text().split(" ").length === 2) {
+            console.log($("#currentDay").text().split(" ").length)
+            monthMoveIndex++;
+            $("#currentDay").text(moment().add(monthMoveIndex, 'months').format("LL"));
+            goToCalendar();
+            return;
+        }
         dateMoveIndex ++;
         $("#currentDay").text(moment().add(dateMoveIndex, 'days').format("LL"));   
         changeBackgroundOfTheDateHeader();

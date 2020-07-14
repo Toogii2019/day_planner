@@ -4,8 +4,10 @@ function goToCalendar() {
     let calendarAppDiv = $("<div>");
     calendarAppDiv.attr("id", "calendar-app");
     $(".container").append(calendarAppDiv);
-    $("#currentDay").text(moment($("#currentDay")).format("MMM YYYY"));
+    console.log("This is what I found - ", $("#currentDay").text());
 
+    $("#currentDay").text(moment($("#currentDay").text()).format("MMM YYYY"));
+    console.log("This is what I found - ", $("#currentDay").text());
     // const isWeekend = day => {
     //     return true;
     // }
