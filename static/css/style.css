@@ -17,15 +17,18 @@ textarea{
   min-width: 300px;
   width: 100vw;
 }
+
 nav {
-  margin-top: -10px;
-  background: rgb(135, 179, 135);
+  position: fixed;
+  margin-top: -30px;
+  background: rgba(135, 179, 135, 0.5);
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   font-family: "Lobster";
+  width: 100%;
 }
 .right-button {
   background: linear-gradient(to right, rgb(104, 201, 75), rgba(237, 247, 234, 0.7));
