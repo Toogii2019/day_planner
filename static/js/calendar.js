@@ -4,26 +4,16 @@ function goToCalendar() {
     let calendarAppDiv = $("<div>");
     calendarAppDiv.attr("id", "calendar-app");
     $(".container").append(calendarAppDiv);
-    console.log("This is what I found - ", $("#currentDay").text());
-
     $("#currentDay").text(moment($("#currentDay").text()).format("MMM YYYY"));
-    console.log("This is what I found - ", $("#currentDay").text());
-    // const isWeekend = day => {
-    //     return true;
-    // }
-
     const calendar = document.querySelector("#calendar-app");
-    
     buildCalendar();
-
     changeMonthBackground();
 
     function buildCalendar() {
-        let firstDay = moment($("#currentDay")).startOf('month');
-        let lastDay = moment($("#currentDay")).endOf('month');
+        let firstDay = moment($("#currentDay").text()).startOf('month');
+        let lastDay = moment($("#currentDay").text()).endOf('month');
         while (!firstDay.isAfter(lastDay)) {
-            const weekend = isWeekend();
-            calendar.insertAdjacentHTML("beforeend", `<div class="day ${weekend ? "weekend" : ""}">${firstDay.format("ddd DD")}</div>`);
+            calendar.insertAdjacentHTML("beforeend", `<div class="day">${firstDay.format("ddd DD")}</div>`);
             firstDay.add(1, 'day');
         }
     }
