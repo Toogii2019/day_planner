@@ -1,10 +1,12 @@
-$(document).ready(function() {
+$(document).ready(showDates(moment().format("LL")));
+
+function showDates (today) {
     console.log(moment());
-    const today = moment().format("LL");
-    $("#currentDay").text(moment().format("LL"));
-    var dateMoveIndex = 0;
+    $("#currentDay").text(today);
+    var dateMoveIndex = moment(today).diff(moment(), 'day');
     var presentHour;
     var presentActivity;
+    changeBackgroundOfTheDateHeader();
     function changeBackgroundOfTheDateHeader() {
         if (isWeekend()) {
             $("#currentDay").attr("class", "weekend");
@@ -174,7 +176,7 @@ $(document).ready(function() {
     }
     updateClock();
     var clockInTheHeader = setInterval(updateClock, 1000);
-    var timeBlockRefresh = setInterval(displayTimeBlocks, 60000);
+    // var timeBlockRefresh = setInterval(displayTimeBlocks, 60000);
     displayTimeBlocks();
 
     $(".left-button").on("click", moveDateBackward);
@@ -189,6 +191,6 @@ $(document).ready(function() {
         var calendarDay = moment($("#currentDay").text()).format("LL");
         updateStorage(calendarDay, textId, textContent);
     })
-})
+}
 
 
