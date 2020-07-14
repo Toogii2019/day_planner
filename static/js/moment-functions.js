@@ -7,14 +7,14 @@ function isWeekend(dateObj) {
 }
 
 function isFutureDay(dateObj) {
-    if (moment().isBefore(moment($("#currentDay").text()), 'day')) {
+    if (moment().isBefore(moment(dateObj), 'day')) {
         return true;
     }
     return false;
 }
 
-function isPresentDay() {
-    if (moment().isSame(moment($("#currentDay").text()), 'day')) {
+function isPresentDay(dateObj) {
+    if (moment().isSame(moment(dateObj), 'day')) {
         return true;
     }
     return false;
@@ -41,8 +41,8 @@ function isPastHour(index) {
     return false;
 }
 
-function isPastDay() {
-    if (moment().isAfter(moment($("#currentDay").text()), 'day')) {
+function isPastDay(dateObj) {
+    if (moment().isAfter(moment(dateObj), 'day')) {
         return true;
     }
     return false;

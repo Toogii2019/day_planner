@@ -21,6 +21,15 @@ function goToCalendar() {
             if (isWeekend(dateChosen)) {
                 calendar.insertAdjacentHTML("beforeend", `<div class="day weekend">${firstDay.format("ddd DD")}</div>`);
             }
+            else if (isFutureDay(dateChosen)) {
+                calendar.insertAdjacentHTML("beforeend", `<div class="day future">${firstDay.format("ddd DD")}</div>`);
+            }
+            else if (isPresentDay(dateChosen)) {
+                calendar.insertAdjacentHTML("beforeend", `<div class="day present">${firstDay.format("ddd DD")}</div>`);
+            }
+            else if (isPastDay(dateChosen)) {
+                calendar.insertAdjacentHTML("beforeend", `<div class="day past">${firstDay.format("ddd DD")}</div>`);
+            }
             else {
                 calendar.insertAdjacentHTML("beforeend", `<div class="day">${firstDay.format("ddd DD")}</div>`);
             }

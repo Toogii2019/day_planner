@@ -145,7 +145,6 @@ function showDates (today) {
                 continue;
             } 
             textArea.disabled = false;
-            
             if (isFutureDay(dateObj)) {
                 textArea.setAttribute("class","time-block future");
                 updateTextAreas(i);

@@ -9,10 +9,11 @@
 
 .day {
     /* padding: 100px; */
-    border: 1px solid rgb(216, 233, 216);
+    border: 1px solid rgb(24, 26, 24);
     justify-content: center;
     align-items: center;
     text-align: center;
+
 }
 .day:hover {
     background: rgb(156, 156, 190);
