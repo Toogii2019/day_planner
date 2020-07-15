@@ -27,7 +27,7 @@ function goToCalendar() {
             }
         }
         while (!firstDay.isAfter(lastDay)) {
-            let day = firstDay.format("DD");
+            let day = firstDay.format("D");
             let month = firstDay.format("MMMM");
             let year = firstDay.format("YYYY");
             let dateChosen = month + " " + day + "," + " " + year;
