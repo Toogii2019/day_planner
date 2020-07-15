@@ -16,8 +16,8 @@ function goToCalendar() {
         let closestWeekend = moment($("#currentDay").text()).day(0);
         let lastDay = moment($("#currentDay").text()).day(30);
         let gap = firstDay.diff(closestWeekend, 'days');
-        console.log(firstDay.format("DD"));
-        console.log(lastDay.format("DD"));
+        console.log(firstDay);
+        console.log(lastDay);
         console.log($("#currentDay").text());
         // console.log(moment())
         // console.log(firstDay.format());
