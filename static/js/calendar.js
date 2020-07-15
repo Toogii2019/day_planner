@@ -9,9 +9,12 @@ function goToCalendar() {
     changeMonthBackground();
 
     function buildCalendar() {
-        let firstDay = moment($("#currentDay").text()).startOf('month');
-        let closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
-        let lastDay = moment($("#currentDay").text()).endOf('month');
+        // let firstDay = moment($("#currentDay").text()).startOf('month');
+        // let closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
+        // let lastDay = moment($("#currentDay").text()).endOf('month');
+        let firstDay = moment($("#currentDay").text()).day(3);
+        let closestWeekend = moment($("#currentDay").text()).day(0);
+        let lastDay = moment($("#currentDay").text()).day(30);
         let gap = firstDay.diff(closestWeekend, 'days');
         console.log(firstDay.format("DD"));
         console.log(lastDay.format("DD"));
