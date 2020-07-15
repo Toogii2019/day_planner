@@ -3,6 +3,9 @@ function goToCalendar() {
 
     let calendarAppDiv = $("<div>");
     calendarAppDiv.attr("id", "calendar-app");
+    var firstDay = moment($("#currentDay").text()).startOf('month');
+    var closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
+    var lastDay = moment($("#currentDay").text()).endOf('month');
     $(".container").append(calendarAppDiv);
     $("#currentDay").text(moment($("#currentDay").text()).format("MMM YYYY"));
     var signal = buildCalendar();
@@ -12,9 +15,9 @@ function goToCalendar() {
     changeMonthBackground();
 
     function buildCalendar() {
-        let firstDay = moment($("#currentDay").text()).startOf('month');
-        let closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
-        let lastDay = moment($("#currentDay").text()).endOf('month');
+        // let firstDay = moment($("#currentDay").text()).startOf('month');
+        // let closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
+        // let lastDay = moment($("#currentDay").text()).endOf('month');
         // let firstDay = moment($("#currentDay").text()).day(3);
         // let closestWeekend = moment($("#currentDay").text()).day(0);
         // let lastDay = moment($("#currentDay").text()).day(30);
