@@ -186,7 +186,7 @@ function showDates (today) {
 
     $(".saveBtn").on("click", function(event) {
         var textId = event.target.value;
-        var textContent = document.getElementById(textId).value;
+        var textContent = document.getElementById(textId).value.trim();
         var calendarDay = moment($("#currentDay").text()).format("LL");
         updateStorage(calendarDay, textId, textContent);
     })
