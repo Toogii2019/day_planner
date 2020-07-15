@@ -13,9 +13,10 @@ function goToCalendar() {
         let closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
         let lastDay = moment($("#currentDay").text()).endOf('month');
         let gap = firstDay.diff(closestWeekend, 'days');
-        console.log(firstDay.format());
-        console.log(closestWeekend.format());
-        console.log(gap);
+        // console.log(moment())
+        // console.log(firstDay.format());
+        // console.log(closestWeekend.format());
+        // console.log(gap);
         if (gap < 7) {
             for (i=0;i<gap;i++) {
                 calendarAppDiv.append(`<div class='day past-month' data-date='past-month'>${closestWeekend.format("ddd DD")}</div>`);
