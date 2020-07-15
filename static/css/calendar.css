@@ -24,11 +24,18 @@
 .past-month {
     border: 1px dotted;
 }
+.active {
+    color: blue;
+}
+
+.active:hover {
+    background: rgb(36, 36, 235);
+}
 
 @media(max-width: 768px) {
     #calendar-app {
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(7, 1fr);    
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(10, 1fr);    
     }
 
 }

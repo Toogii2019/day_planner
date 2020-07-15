@@ -37,29 +37,29 @@ function goToCalendar() {
             // console.log(dateChosen);
             for (index=0;index<10;index++) {
                 if (localStorage.getItem(dateChosen + "-" + index)) {
-                    activity = "<br><strong style='color: red;'>Note Exist</strong>";
+                    activity = true;
                     // console.log(dateChosen + "-" + index);
                     // console.log(localStorage.getItem(dateChosen + "-" + index));
                     break;
                 }
                 else {
-                    activity = "";
+                    activity = false;
                 }
             }
             if (isWeekend(dateChosen)) {
-                calendarAppDiv.append(`<div class="day weekend">${firstDay.format("ddd DD")} ${activity}</div>`);
+                calendarAppDiv.append(`<div class="day weekend ${activity ? "active" : ""}">${firstDay.format("ddd DD")}</div>`);
             }
             else if (isFutureDay(dateChosen)) {
-                calendarAppDiv.append(`<div class="day future">${firstDay.format("ddd DD")} ${activity}</div>`);
+                calendarAppDiv.append(`<div class="day future ${activity ? "active" : ""}">${firstDay.format("ddd DD")}</div>`);
             }
             else if (isPresentDay(dateChosen)) {
-                calendarAppDiv.append(`<div class="day present">${firstDay.format("ddd DD")} ${activity}</div>`);
+                calendarAppDiv.append(`<div class="day present ${activity ? "active" : ""}">${firstDay.format("ddd DD")}</div>`);
             }
             else if (isPastDay(dateChosen)) {
-                calendarAppDiv.append(`<div class="day past">${firstDay.format("ddd DD")} ${activity}</div>`);
+                calendarAppDiv.append(`<div class="day past ${activity ? "active" : ""}">${firstDay.format("ddd DD")}</div>`);
             }
             else {
-                calendarAppDiv.append(`<div class="day">${firstDay.format("ddd DD")} ${activity}</div>`);
+                calendarAppDiv.append(`<div class="day ${activity ? "active" : ""}">${firstDay.format("ddd DD")}</div>`);
             }
             firstDay.add(1, 'day');
             
@@ -70,6 +70,8 @@ function goToCalendar() {
         if (event.target.getAttribute("data-date") == "past-month") {
             return;
         }
+        console.log(event.target.textContent);
+
         let day = event.target.textContent.split(" ")[1];
         let month = $("#currentDay").text().split(" ")[0];
         let year = $("#currentDay").text().split(" ")[1];
