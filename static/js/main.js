@@ -78,6 +78,7 @@ function showDates (today) {
         if (isWeekend(dateObj)) {
             return;
         }
+        displayAlert("Saved Successfully");
         localStorage.setItem(date + "-" + textId, textContent);
         displayTimeBlocks();
     }
@@ -184,7 +185,6 @@ function showDates (today) {
     $(".right-button").on("click", moveDateForward);
 
     $(".saveBtn").on("click", function(event) {
-        displayAlert("Saved Successfully");
         var textId = event.target.value;
         var textContent = document.getElementById(textId).value;
         var calendarDay = moment($("#currentDay").text()).format("LL");
