@@ -4,9 +4,7 @@ body {
   line-height: 1;
   min-width: 400px;
   background-image: url(../images/calendar.jpg);
-  background-size: cover;
-
-  
+  background-size: cover;  
 }
 
 textarea{
@@ -34,6 +32,7 @@ nav {
   font-family: "Lobster";
   width: 100%;
   box-shadow: 5px;
+  flex-wrap: wrap;
 }
 .right-button {
   background: linear-gradient(to right, rgb(104, 201, 75), rgba(237, 247, 234, 0.7));
