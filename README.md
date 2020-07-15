@@ -9,6 +9,10 @@ Publicly Deployed Link:
 
 https://toogii2019.github.io/day_planner/
 
-Bug: The calendar view is not working on IOS but perfectly working on Android. 
+Bug: 
 
+The calendar view is not working on IOS.
 
+If you want to test the application on the Phone, suggesting to use Android phone.
+
+Debug output: Some momentjs methods like startOf(), endOf() are not working as expected in IOS. 

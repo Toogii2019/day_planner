@@ -53,7 +53,7 @@ function goToCalendar() {
                 calendarAppDiv.append(`<div class="day future ${activity ? "active" : ""}">${firstDay.format("ddd DD")}</div>`);
             }
             else if (isPresentDay(dateChosen)) {
-                calendarAppDiv.append(`<div class="day present ${activity ? "active" : ""}">${firstDay.format("ddd DD")}</div>`);
+                calendarAppDiv.append(`<div class="day present ${activity ? "active" : ""}">${firstDay.format("ddd DD")} <br><br> Today</div>`);
             }
             else if (isPastDay(dateChosen)) {
                 calendarAppDiv.append(`<div class="day past ${activity ? "active" : ""}">${firstDay.format("ddd DD")}</div>`);
