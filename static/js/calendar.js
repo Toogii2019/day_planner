@@ -26,26 +26,33 @@ function goToCalendar() {
                 closestWeekend.add(1, 'day');
             }
         }
+        var index = 0;
+        var activity;
         while (!firstDay.isAfter(lastDay)) {
             let day = firstDay.format("D");
             let month = firstDay.format("MMMM");
             let year = firstDay.format("YYYY");
             let dateChosen = month + " " + day + "," + " " + year;
-
-            if (isWeekend(dateChosen)) {
-                calendarAppDiv.append(`<div class="day weekend">${firstDay.format("ddd DD")}</div>`);
-            }
-            else if (isFutureDay(dateChosen)) {
-                calendarAppDiv.append(`<div class="day future">${firstDay.format("ddd DD")}</div>`);
-            }
-            else if (isPresentDay(dateChosen)) {
-                calendarAppDiv.append(`<div class="day present">${firstDay.format("ddd DD")}</div>`);
-            }
-            else if (isPastDay(dateChosen)) {
-                calendarAppDiv.append(`<div class="day past">${firstDay.format("ddd DD")}</div>`);
+            if (localStorage.getItem(dateChosen + "-" + index)) {
+                activity = "<br><strong style='color: red;'>Note Exist</strong>";
             }
             else {
-                calendarAppDiv.append(`<div class="day">${firstDay.format("ddd DD")}</div>`);
+                activity = "";
+            }
+            if (isWeekend(dateChosen)) {
+                calendarAppDiv.append(`<div class="day weekend">${firstDay.format("ddd DD")} ${activity}</div>`);
+            }
+            else if (isFutureDay(dateChosen)) {
+                calendarAppDiv.append(`<div class="day future">${firstDay.format("ddd DD")} ${activity}</div>`);
+            }
+            else if (isPresentDay(dateChosen)) {
+                calendarAppDiv.append(`<div class="day present">${firstDay.format("ddd DD")} ${activity}</div>`);
+            }
+            else if (isPastDay(dateChosen)) {
+                calendarAppDiv.append(`<div class="day past">${firstDay.format("ddd DD")} ${activity}</div>`);
+            }
+            else {
+                calendarAppDiv.append(`<div class="day">${firstDay.format("ddd DD")} ${activity}</div>`);
             }
             firstDay.add(1, 'day');
         }
