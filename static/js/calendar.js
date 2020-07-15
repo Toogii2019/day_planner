@@ -6,6 +6,10 @@ function goToCalendar() {
     var firstDay = moment($("#currentDay").text()).startOf('month');
     var closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
     var lastDay = moment($("#currentDay").text()).endOf('month');
+    console.log(firstDay);
+    console.log(lastDay);
+    console.log(closestWeekend);
+    console.log($("#currentDay").text());
     $(".container").append(calendarAppDiv);
     $("#currentDay").text(moment($("#currentDay").text()).format("MMM YYYY"));
     var signal = buildCalendar();
