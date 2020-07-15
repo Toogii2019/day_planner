@@ -9,5 +9,6 @@ Publicly Deployed Link:
 
 https://toogii2019.github.io/day_planner/
 
-Bug: This project used moment.js and some of the methods aren't working in IOS phones this calendar view doesn't work but the hourly operation is supported on IOS Phones. Working on using Date Object to add support on IOS Phones.
+Bug: The calendar view is not working on IOS but perfectly working on Android. 
+
 
