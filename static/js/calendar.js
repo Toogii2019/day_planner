@@ -5,7 +5,10 @@ function goToCalendar() {
     calendarAppDiv.attr("id", "calendar-app");
     $(".container").append(calendarAppDiv);
     $("#currentDay").text(moment($("#currentDay").text()).format("MMM YYYY"));
-    buildCalendar();
+    var signal = buildCalendar();
+    if (signal == "Escape") {
+        return;
+    }
     changeMonthBackground();
 
     function buildCalendar() {
@@ -19,6 +22,9 @@ function goToCalendar() {
         console.log(firstDay);
         console.log(lastDay);
         console.log($("#currentDay").text());
+        if (firstDay === "Invalid date" || lastDay === "Invalid date") {
+            return "Escape";
+        }
         // console.log(moment())
         // console.log(firstDay.format());
         // console.log(closestWeekend.format());
@@ -29,18 +35,23 @@ function goToCalendar() {
                 closestWeekend.add(1, 'day');
             }
         }
-        var index = 0;
         var activity;
         while (!firstDay.isAfter(lastDay)) {
             let day = firstDay.format("D");
             let month = firstDay.format("MMMM");
             let year = firstDay.format("YYYY");
             let dateChosen = month + " " + day + "," + " " + year;
-            if (localStorage.getItem(dateChosen + "-" + index)) {
-                activity = "<br><strong style='color: red;'>Note Exist</strong>";
-            }
-            else {
-                activity = "";
+            // console.log(dateChosen);
+            for (index=0;index<10;index++) {
+                if (localStorage.getItem(dateChosen + "-" + index)) {
+                    activity = "<br><strong style='color: red;'>Note Exist</strong>";
+                    // console.log(dateChosen + "-" + index);
+                    // console.log(localStorage.getItem(dateChosen + "-" + index));
+                    break;
+                }
+                else {
+                    activity = "";
+                }
             }
             if (isWeekend(dateChosen)) {
                 calendarAppDiv.append(`<div class="day weekend">${firstDay.format("ddd DD")} ${activity}</div>`);
@@ -58,6 +69,7 @@ function goToCalendar() {
                 calendarAppDiv.append(`<div class="day">${firstDay.format("ddd DD")} ${activity}</div>`);
             }
             firstDay.add(1, 'day');
+            
         }
     }
     function jumpToDate(event) {
