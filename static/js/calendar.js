@@ -3,13 +3,8 @@ function goToCalendar() {
 
     let calendarAppDiv = $("<div>");
     calendarAppDiv.attr("id", "calendar-app");
-    var firstDay = moment($("#currentDay").text()).startOf('month');
-    var closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
-    var lastDay = moment($("#currentDay").text()).endOf('month');
-    console.log(firstDay);
-    console.log(lastDay);
-    console.log(closestWeekend);
-    console.log($("#currentDay").text());
+
+
     $(".container").append(calendarAppDiv);
     $("#currentDay").text(moment($("#currentDay").text()).format("MMM YYYY"));
     var signal = buildCalendar();
@@ -19,30 +14,21 @@ function goToCalendar() {
     changeMonthBackground();
 
     function buildCalendar() {
-        // let firstDay = moment($("#currentDay").text()).startOf('month');
-        // let closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
-        // let lastDay = moment($("#currentDay").text()).endOf('month');
-        // let firstDay = moment($("#currentDay").text()).day(3);
-        // let closestWeekend = moment($("#currentDay").text()).day(0);
-        // let lastDay = moment($("#currentDay").text()).day(30);
+        let firstDay = moment($("#currentDay").text()).startOf('month');
+        let closestWeekend = moment($("#currentDay").text()).startOf('month').day(-1);
+        let lastDay = moment($("#currentDay").text()).endOf('month');
         let gap = firstDay.diff(closestWeekend, 'days');
-        console.log(firstDay);
-        console.log(lastDay);
-        console.log($("#currentDay").text());
+
         if (firstDay === "Invalid date" || lastDay === "Invalid date") {
             return "Escape";
         }
-        // console.log(moment())
-        // console.log(firstDay.format());
-        // console.log(closestWeekend.format());
-        // console.log(gap);
         if (gap < 7) {
             for (i=0;i<gap;i++) {
                 calendarAppDiv.append(`<div class='day past-month' data-date='past-month'>${closestWeekend.format("ddd DD")}</div>`);
                 closestWeekend.add(1, 'day');
             }
         }
-        var activity;
+        let activity;
         while (!firstDay.isAfter(lastDay)) {
             let day = firstDay.format("D");
             let month = firstDay.format("MMMM");
@@ -80,7 +66,7 @@ function goToCalendar() {
         }
     }
     function jumpToDate(event) {
-        console.log(event.target.getAttribute("data-date"));
+        // console.log(event.target.getAttribute("data-date"));
         if (event.target.getAttribute("data-date") == "past-month") {
             return;
         }

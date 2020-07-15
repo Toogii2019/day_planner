@@ -26,7 +26,7 @@ function showDates (today) {
 
     function moveDateBackward() {
         if ($("#currentDay").text().split(" ").length === 2) {
-            console.log($("#currentDay").text().split(" ").length)
+            // console.log($("#currentDay").text().split(" ").length)
             monthMoveIndex--;
             $("#currentDay").text(moment().add(monthMoveIndex, 'months').format("LL"));
             goToCalendar();
@@ -46,7 +46,7 @@ function showDates (today) {
     }
     function moveDateForward() {
         if ($("#currentDay").text().split(" ").length === 2) {
-            console.log($("#currentDay").text().split(" ").length)
+            // console.log($("#currentDay").text().split(" ").length)
             monthMoveIndex++;
             $("#currentDay").text(moment().add(monthMoveIndex, 'months').format("LL"));
             goToCalendar();
