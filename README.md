@@ -1,25 +1,38 @@
-# day_planner
+# Day planner App
+
+This app uses pure Javascript Front End solution and provides small calendar type business day hour planner.
+
+## Screenshots of the Deployed Website
+
+![Screen Shot 2020-08-11 at 1 05 10 PM](https://user-images.githubusercontent.com/53624923/89944264-5d1db880-dbd4-11ea-8482-d01424a0fbaa.png)
 
 
-Code: This app is not using any back end services like databases, but only front-end features on Javascript.
+### How to start development:
 
-Styling: Incorporated with bootstrap framework and local grid design for responsiveness. 
+Create day_planner_development branch locally and clone the repo
 
-Publicly Deployed Link:
+git clone -b day_planner_development git@github.com:Toogii2019/day_planner.git
+
+git push
+
+Go to https://github.com/Toogii2019/day_planner/pulls and create New Pull Request for your changes.
+
+#### Review
+
+The following is submitted for review:
+
+* The URL of the deployed application.
 
 https://toogii2019.github.io/day_planner/
 
-Bug: 
+* The URL of the GitHub repository which includes a README describing the project.
 
-The calendar view is not working on IOS.
+https://github.com/Toogii2019/day_planner
 
-If you want to test this application on the Phone, please use Android phone.
+HTML Checker
 
-Debug output: Some momentjs methods like startOf(), endOf() are not working as expected in IOS. 
-Solution: Using Date object instead of momentjs fixes the issue.
+index.html https://validator.w3.org/nu/?doc=https%3A%2F%2Ftoogii2019.github.io%2Fday_planner%2F
 
-# test1 
+##### Resources
 
-## test2 
-
-### test3 
+Bootstrap framework used : https://getbootstrap.com/
