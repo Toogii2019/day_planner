@@ -17,9 +17,7 @@ git push
 
 Go to https://github.com/Toogii2019/day_planner/pulls and create New Pull Request for your changes.
 
-#### Review
-
-The following is submitted for review:
+#### Likns
 
 * The URL of the deployed application.
 
